@@ -62,15 +62,22 @@ const config = {
 
 // 开发环境配置
 if(isDev){
+    config.devtool = '#cheap-module-eval-source-map' // 帮助代码映射、配置ES6代码
     config.devServer = {
         port: 8000,
         host: '0.0.0.0',
          // 错误处理
         overlay: {
-            errors: true
-        }
-        
+            errors: true // 输出错误信息到console
+        },
+        //open: true // 自动打开浏览器
+        //historyFallback: {}, // 将没有有映射的地址映射过来
+        hot: true,  //true: 只渲染当前修改的组件
     }
+    config.plugins.push(
+        new webpack.HotModuleReplacementPlugin(),   // 热更新
+        new webpack.NoEmitOnErrorsPlugin()          // 减少不需要的信息展示
+    )
 }
 
 module.exports = config
