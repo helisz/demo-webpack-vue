@@ -18,20 +18,33 @@ const config = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
-            },{
+            },
+            {
+                test: /\.jsx$/,
+                loader: 'babel-loader'
+            },
+            {
                 test: /\.css$/,
                 use: [
                     'style-loader',     // css 写到html文件
                     'css-loader'        //读取css文件
                 ]
-            },{
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     "style-loader",  
-                    "css-loader",   
+                    "css-loader",
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },  
                     "sass-loader"
                 ]
-            },{
+            },
+            {
                 test: /\.(gif|jpg|jpeg|png|svg)$/,
                 use:[
                     {
